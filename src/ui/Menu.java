@@ -29,8 +29,17 @@ public class Menu {
 
 			showMenu();
 			choice = getChoice();
-			System.out.println();
-			doChoice(choice);
+			if(mcs.getActiveUser() != null) {
+
+				doChoice(choice);
+
+			} else if(choice == 4 || choice == 6 || choice == 7 || choice == 9 || choice == 10){
+
+				System.out.print("--------------------------\n" + "Please set an active user first. Press ENTER to go back.");
+				System.out.println();
+
+			} else doChoice(choice);
+
 			if(choice != 11) sc.nextLine();
 
 		} while (choice != 11);
@@ -47,7 +56,7 @@ public class Menu {
 
 		} else {
 
-			System.out.println("Please create and set an active user first.");
+			System.out.println("Please set an active user first.");
 			System.out.println("------------------------------");
 
 		}
@@ -105,7 +114,7 @@ public class Menu {
 
 			case(SHOW_USERS):
 
-
+				showUsers();
 
 				break;
 
@@ -141,7 +150,19 @@ public class Menu {
 
 			case(ADD_PLAYLIST):
 
+				if(mcs.checkSpace(mcs.getPlaylistAmount(), mcs.getMaxPlaylists())){
 
+					Playlist playlist = createPlaylist();
+
+					System.out.println("------------------------------");
+					System.out.println(mcs.add(playlist));
+					System.out.println("Playlists: [" + mcs.getPlaylistAmount() + "/" + mcs.getMaxPlaylists() + "]");
+
+				} else {
+
+					System.out.print("------------------------------\n" + "No more playlists can be added. The limit has been reached. Press ENTER to go back.");
+
+				}
 
 				break;
 
@@ -229,6 +250,39 @@ public class Menu {
 		return new Song(title, artist, releaseDate, duration, genre);
 
 	}
+	public Playlist createPlaylist(){
+
+		System.out.println("---------- NEW PLAYLIST ----------");
+
+		System.out.print("Name: " );
+		String name = sc.nextLine();
+
+		System.out.println("---------- CHOOSE PLAYLIST TYPE ----------");
+		System.out.println("[1] Private (Only you have access).");
+		System.out.println("[2] Restricted (Access: 5 users).");
+		System.out.println("[3] Public (Everyone has access).");
+		System.out.println("------------------------------------------");
+		System.out.print("Please choose a type [1-3]: ");
+		int type = sc.nextInt();
+		sc.nextLine();
+
+		switch(type){
+
+			case(2):
+
+				return new RestrictedPlaylist(name, mcs.getActiveUser());
+
+			case(3):
+
+				return new PublicPlaylist(name);
+
+			default:
+
+				return new PrivatePlaylist(name, mcs.getActiveUser());
+
+		}
+
+	}
 
 	// SHOW
 	public void showUsers() {
@@ -250,7 +304,6 @@ public class Menu {
 		} else {
 
 			System.out.print("--------------------------\n" + "There are no users to show. Press ENTER to continue.");
-			sc.nextLine();
 
 		}
 
@@ -278,33 +331,8 @@ public class Menu {
 		} else {
 
 			System.out.print("--------------------------\n" + "There are no shared songs to show. Press ENTER to continue.");
-			sc.nextLine();
 
 		}
-
-	}
-
-	// LOGIN
-
-	public String logIn(String usernameTry, String passwordTry) {
-
-		User[] users = mcs.getUsers();
-
-		boolean logged = false;
-
-		for(int i = 0; i < mcs.getMaxUsers() && !logged; i++) {
-
-			if(users[i].getUsername().equals(usernameTry) && users[i].getPassword().equals(passwordTry)) {
-
-				logged = true;
-				mcs.setActiveUser(users[i]);
-				System.out.println("Welcome, " + mcs.getActiveUser().getUsername() + ". Press ENTER to continue.");
-
-			}
-
-		}
-
-		return "Please try again";
 
 	}
 
