@@ -27,6 +27,7 @@ public class Menu {
 
 		do {
 
+
 			showMenu();
 			choice = getChoice();
 			if(mcs.getActiveUser() != null) {
@@ -36,7 +37,6 @@ public class Menu {
 			} else if(choice == 4 || choice == 6 || choice == 7 || choice == 9 || choice == 10){
 
 				System.out.print("--------------------------\n" + "Please set an active user first. Press ENTER to go back.");
-				System.out.println();
 
 			} else doChoice(choice);
 
@@ -102,7 +102,7 @@ public class Menu {
 
 					System.out.println("------------------------------");
 					System.out.println(mcs.add(user));
-					System.out.println("Users: [" + mcs.getUserAmount() + "/" + mcs.getMaxUsers() + "]");
+					System.out.print("Users: [" + mcs.getUserAmount() + "/" + mcs.getMaxUsers() + "]");
 
 				} else {
 
@@ -120,7 +120,28 @@ public class Menu {
 
 			case(SET_ACTIVE_USER):
 
+				if(mcs.getUsers()[0] != null){
 
+					User user = null;
+
+					System.out.println("-------- CHOOSE USER ---------");
+					for (int i = 0; i < mcs.getUserAmount(); i++) {
+
+						System.out.println("[" + (i+1) + "] " + mcs.getUsers()[i].getUsername());
+
+					}
+					System.out.println("------------------------------");
+					System.out.print("Please choose a user [1-" + mcs.getUserAmount() + "]: ");
+					int userChoice = sc.nextInt();
+					sc.nextLine();
+
+					System.out.print(mcs.setActiveUser(mcs.getUsers()[userChoice-1]));
+
+				} else {
+
+					System.out.print("------------------------------\n" + "There are no users to choose from. Press ENTER to go back.");
+
+				}
 
 				break;
 
@@ -132,7 +153,7 @@ public class Menu {
 
 					System.out.println("------------------------------");
 					System.out.println(mcs.add(song));
-					System.out.println("Shared Songs: [" + mcs.getSharedSongsAmount() + "/" + mcs.getMaxSharedSongs() + "]");
+					System.out.print("Shared Songs: [" + mcs.getSharedSongsAmount() + "/" + mcs.getMaxSharedSongs() + "]");
 
 				} else {
 
@@ -144,7 +165,7 @@ public class Menu {
 
 			case(SHOW_SONGS):
 
-
+				showSharedSongs();
 
 				break;
 
@@ -156,7 +177,7 @@ public class Menu {
 
 					System.out.println("------------------------------");
 					System.out.println(mcs.add(playlist));
-					System.out.println("Playlists: [" + mcs.getPlaylistAmount() + "/" + mcs.getMaxPlaylists() + "]");
+					System.out.print("Playlists: [" + mcs.getPlaylistAmount() + "/" + mcs.getMaxPlaylists() + "]");
 
 				} else {
 
@@ -252,16 +273,16 @@ public class Menu {
 	}
 	public Playlist createPlaylist(){
 
-		System.out.println("---------- NEW PLAYLIST ----------");
+		System.out.println("-------- NEW PLAYLIST --------");
 
 		System.out.print("Name: " );
 		String name = sc.nextLine();
 
-		System.out.println("---------- CHOOSE PLAYLIST TYPE ----------");
+		System.out.println("---- CHOOSE PLAYLIST TYPE ----");
 		System.out.println("[1] Private (Only you have access).");
 		System.out.println("[2] Restricted (Access: 5 users).");
 		System.out.println("[3] Public (Everyone has access).");
-		System.out.println("------------------------------------------");
+		System.out.println("------------------------------");
 		System.out.print("Please choose a type [1-3]: ");
 		int type = sc.nextInt();
 		sc.nextLine();
@@ -293,44 +314,96 @@ public class Menu {
 
 				if (mcs.getUsers()[i] != null) {
 
-					System.out.println("----- USER " + (i+1) + " -----");
+					System.out.println("----------- USER " + (i+1) + " -----------");
 					System.out.println(mcs.getUsers()[i].getInfo());
-					System.out.println("-----------------");
+					System.out.println("------------------------------");
 
 				}
 
 			}
 
+			System.out.print("All users have been shown. Press ENTER to go back.");
+
 		} else {
 
-			System.out.print("--------------------------\n" + "There are no users to show. Press ENTER to continue.");
+			System.out.print("------------------------------\n" + "There are no users to show. Press ENTER to go back.");
 
 		}
 
 	}
-	public void showSongPool() {
+	public void showSharedSongs() {
 
-		Song[] songPool = mcs.getSongPool();
+		if(mcs.getSongPool()[0] != null){
 
-		if(songPool[0] != null){
+			for(int i = 0; i < mcs.getSongPool().length; i++) {
 
-			for(int i = 0; i < mcs.getMaxUsers(); i++) {
+				if (mcs.getSongPool()[i] != null) {
 
-				if (songPool[i] != null) {
-
-					System.out.println("---------- SONG " + (i+1) + " ----------");
-					System.out.println("Title: " + songPool[i].getTitle());
-					System.out.println("Artist: " + songPool[i].getArtist());
-					System.out.println("Duration: " + songPool[i].getDuration());
-					System.out.println("Genre: " + songPool[i].getGenre() + "\n");
+					System.out.println("----------- SONG " + (i+1) + " -----------");
+					System.out.println(mcs.getSongPool()[i].getInfo());
+					System.out.println("------------------------------");
 
 				}
 
 			}
 
+			System.out.print("All songs have been shown. Press ENTER to go back.");
+
 		} else {
 
-			System.out.print("--------------------------\n" + "There are no shared songs to show. Press ENTER to continue.");
+			System.out.print("------------------------------\n" + "There are no songs to show. Press ENTER to go back.");
+
+		}
+
+	}
+
+	// CHOOSE
+	public Playlist choosePlaylist() {
+
+		if(mcs.getPlaylists()[0] != null){
+
+			System.out.println("------ CHOOSE PLAYLIST -------");
+			for (int i = 0; i < mcs.getPlaylistAmount(); i++) {
+
+				System.out.println("[" + (i+1) + "] " + mcs.getPlaylists()[i].getName());
+
+			}
+			System.out.println("------------------------------");
+			System.out.print("Please choose a playlist [1-" + mcs.getPlaylistAmount() + "]: ");
+			int userChoice = sc.nextInt();
+			sc.nextLine();
+
+			return mcs.getPlaylists()[userChoice-1];
+
+		} else {
+
+		System.out.print("------------------------------\n" + "There are no playlists to choose from. Press ENTER to go back.");
+		return null;
+
+		}
+
+	}
+	public Song chooseSong() {
+
+		if(mcs.getSongPool()[0] != null){
+
+			System.out.println("------ CHOOSE SONG -------");
+			for (int i = 0; i < mcs.getSharedSongsAmount(); i++) {
+
+				System.out.println("[" + (i+1) + "] " + mcs.getSongPool()[i].getTitle());
+
+			}
+			System.out.println("------------------------------");
+			System.out.print("Please choose a playlist [1-" + mcs.getSharedSongsAmount() + "]: ");
+			int userChoice = sc.nextInt();
+			sc.nextLine();
+
+			return mcs.getSongPool()[userChoice-1];
+
+		} else {
+
+			System.out.print("------------------------------\n" + "There are no songs to choose from. Press ENTER to go back.");
+			return null;
 
 		}
 

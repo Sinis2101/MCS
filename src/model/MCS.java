@@ -128,8 +128,12 @@ public class MCS {
 	}
 
 	// SETTERS
-	public void setActiveUser(User activeUser) {
+	public String setActiveUser(User activeUser) {
+
 		this.activeUser = activeUser;
+
+		return "Active user is now: " + activeUser.getUsername() + ". Press ENTER to continue.";
+
 	}
 
 }
