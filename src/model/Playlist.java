@@ -18,4 +18,18 @@ public abstract class Playlist {
 
     }
 
+    // METHODS
+    public abstract String getInfo();
+    public abstract String addSong(Song song, Playlist playlist);
+
+    // GETTERS
+    public String getName() {
+        return name;
+    }
+    public String getDuration() {
+        return duration;
+    }
+    public Song[] getSongs() {
+        return songs;
+    }
 }
