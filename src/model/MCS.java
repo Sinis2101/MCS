@@ -2,7 +2,7 @@ package model;
 
 public class MCS {
 
-	private static final int MAX_USERS = 1;
+	private static final int MAX_USERS = 10;
 	private static final int MAX_SHARED_SONGS = 30;
 	private static final int MAX_PLAYLISTS = 20;
 
@@ -65,6 +65,26 @@ public class MCS {
 			if(songPool[i] == null) {
 
 				songPool[i] = song;
+				added = true;
+
+			}
+
+		}
+
+		return message;
+
+	}
+	public String add(Playlist playlist) {
+
+		String message = "Playlist has been added successfully. Press ENTER to continue.";
+		boolean added = false;
+		playlistAmount ++;
+
+		for(int i = 0; i < MAX_PLAYLISTS && !added; i++) {
+
+			if(playlists[i] == null) {
+
+				playlists[i] = playlist;
 				added = true;
 
 			}
