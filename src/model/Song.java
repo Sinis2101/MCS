@@ -20,6 +20,15 @@ public class Song {
 	}
 
 	// METHODS
+	public String getInfo() {
+
+		return 	"Title: " + title + "\n" +
+				"Artist: " + artist + "\n" +
+				"Duration: " + duration + "\n" +
+				"Genre: " + genre;
+
+	}
+
 	public int durationToSeconds(String duration){
 
 		String[] stringUnits = duration.split(":");
