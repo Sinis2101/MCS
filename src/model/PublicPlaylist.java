@@ -17,4 +17,14 @@ public class PublicPlaylist extends Playlist {
 
     }
 
+    @Override
+    public String getInfo() {
+        return null;
+    }
+
+    @Override
+    public String addSong(Song song, Playlist playlist) {
+        return null;
+    }
+
 }
