@@ -121,28 +121,9 @@ public class Menu {
 
 			case(SET_ACTIVE_USER):
 
-				if(mcs.getUsers()[0] != null){
+				User user = chooseUser();
 
-					User user = null;
-
-					System.out.println("-------- CHOOSE USER ---------");
-					for (int i = 0; i < mcs.getUserAmount(); i++) {
-
-						System.out.println("[" + (i+1) + "] " + mcs.getUsers()[i].getUsername());
-
-					}
-					System.out.println("------------------------------");
-					System.out.print("Please choose a user [1-" + mcs.getUserAmount() + "]: ");
-					int userChoice = sc.nextInt();
-					sc.nextLine();
-
-					System.out.print(mcs.setActiveUser(mcs.getUsers()[userChoice-1]));
-
-				} else {
-
-					System.out.print("------------------------------\n" + "There are no users to choose from. Press ENTER to go back.");
-
-				}
+				System.out.print(mcs.setActiveUser(user));
 
 				break;
 
@@ -227,7 +208,11 @@ public class Menu {
 
 			case(MANAGE_ACCESS):
 
+				if(mcs.getPlaylists()[0] != null) {
 
+					Playlist playlist = chooseRestrictedPlaylist();
+
+				} else System.out.print("------------------------------\n" + "There are no playlists to manage. Press ENTER to go back.");
 
 				break;
 
@@ -473,6 +458,57 @@ public class Menu {
 		return null;
 
 	}
+	public Playlist chooseRestrictedPlaylist() {
+
+		Playlist[] accessiblePlaylists = new Playlist[20];
+		int accessiblePlaylistsAmount = 0;
+		int index = 0;
+
+		for(int i = 0; i < mcs.getPlaylistAmount(); i++){
+
+			if(mcs.access(mcs.getPlaylists()[i], mcs.getActiveUser()) && mcs.getPlaylists()[i] instanceof RestrictedPlaylist){
+
+				accessiblePlaylists[index] = mcs.getPlaylists()[i];
+				index ++;
+				accessiblePlaylistsAmount ++;
+
+			}
+
+		}
+
+		if(accessiblePlaylistsAmount != 0){
+
+			for(Playlist playlist : accessiblePlaylists) {
+
+				if(playlist != null){
+
+					System.out.println("------ CHOOSE PLAYLIST -------");
+					for (int i = 0; i < accessiblePlaylistsAmount; i++) {
+
+						System.out.println("[" + (i+1) + "] " + accessiblePlaylists[i].getName());
+
+					}
+					System.out.println("------------------------------");
+					System.out.print("Please choose a playlist [1-" + accessiblePlaylistsAmount + "]: ");
+					int userChoice = sc.nextInt();
+					sc.nextLine();
+
+					return accessiblePlaylists[userChoice-1];
+
+				}
+
+			}
+
+		} else {
+
+			System.out.print("------------------------------\n" + "There are no restricted playlists to manage. Press ENTER to go back.");
+			return null;
+
+		}
+
+		return null;
+
+	}
 	public Song chooseSong(Playlist playlist) {
 
 		if(mcs.getSongPool()[0] != null){
@@ -493,6 +529,31 @@ public class Menu {
 		} else {
 
 			System.out.print("------------------------------\n" + "There are no songs to choose from. Press ENTER to go back.");
+			return null;
+
+		}
+
+	}
+	public User chooseUser() {
+
+		if(mcs.getUsers()[0] != null){
+
+			System.out.println("--------- CHOOSE USER --------");
+			for (int i = 0; i < mcs.getUserAmount(); i++) {
+
+				System.out.println("[" + (i+1) + "] " + mcs.getUsers()[i].getUsername());
+
+			}
+			System.out.println("------------------------------");
+			System.out.print("Please choose a user [1-" + mcs.getUserAmount() + "]: ");
+			int userChoice = sc.nextInt();
+			sc.nextLine();
+
+			return mcs.getUsers()[userChoice-1];
+
+		} else {
+
+			System.out.print("------------------------------\n" + "There are no users to choose from. Press ENTER to go back.");
 			return null;
 
 		}
