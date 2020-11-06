@@ -190,7 +190,20 @@ public class Menu {
 
 			case(ADD_SONG_TO_PLAYLIST):
 
+				Playlist playlist = choosePlaylist();
+				Song song = chooseSong(playlist);
 
+				if(mcs.checkSpace(playlist.getSongsAmount(), Playlist.MAX_SONGS)){
+
+					System.out.println("------------------------------");
+					System.out.println(playlist.addSong(song, playlist));
+					System.out.print("Playlist Songs: [" + playlist.getSongsAmount() + "/" + Playlist.MAX_SONGS + "]");
+
+				} else {
+
+					System.out.print("------------------------------\n" + "No more songs can be added to this playlist. The limit has been reached. Press ENTER to go back.");
+
+				}
 
 				break;
 
@@ -359,20 +372,44 @@ public class Menu {
 	// CHOOSE
 	public Playlist choosePlaylist() {
 
-		if(mcs.getPlaylists()[0] != null){
+		Playlist[] accessiblePlaylists = new Playlist[20];
+		int accessiblePlaylistsAmount = 0;
+		int index = 0;
 
-			System.out.println("------ CHOOSE PLAYLIST -------");
-			for (int i = 0; i < mcs.getPlaylistAmount(); i++) {
+		for(int i = 0; i < mcs.getPlaylistAmount(); i++){
 
-				System.out.println("[" + (i+1) + "] " + mcs.getPlaylists()[i].getName());
+			if(mcs.access(mcs.getPlaylists()[i], mcs.getActiveUser())){
+
+				accessiblePlaylists[index] = mcs.getPlaylists()[i];
+				index ++;
+				accessiblePlaylistsAmount ++;
 
 			}
-			System.out.println("------------------------------");
-			System.out.print("Please choose a playlist [1-" + mcs.getPlaylistAmount() + "]: ");
-			int userChoice = sc.nextInt();
-			sc.nextLine();
 
-			return mcs.getPlaylists()[userChoice-1];
+		}
+
+		if(accessiblePlaylistsAmount != 0){
+
+			for(Playlist playlist : accessiblePlaylists) {
+
+				if(playlist != null){
+
+					System.out.println("------ CHOOSE PLAYLIST -------");
+					for (int i = 0; i < accessiblePlaylistsAmount; i++) {
+
+						System.out.println("[" + (i+1) + "] " + accessiblePlaylists[i].getName());
+
+					}
+					System.out.println("------------------------------");
+					System.out.print("Please choose a playlist [1-" + accessiblePlaylistsAmount + "]: ");
+					int userChoice = sc.nextInt();
+					sc.nextLine();
+
+					return accessiblePlaylists[userChoice-1];
+
+				}
+
+			}
 
 		} else {
 
@@ -381,19 +418,21 @@ public class Menu {
 
 		}
 
+		return null;
+
 	}
-	public Song chooseSong() {
+	public Song chooseSong(Playlist playlist) {
 
 		if(mcs.getSongPool()[0] != null){
 
-			System.out.println("------ CHOOSE SONG -------");
+			System.out.println("---- CHOOSE SONG TO ADD ------");
 			for (int i = 0; i < mcs.getSharedSongsAmount(); i++) {
 
 				System.out.println("[" + (i+1) + "] " + mcs.getSongPool()[i].getTitle());
 
 			}
 			System.out.println("------------------------------");
-			System.out.print("Please choose a playlist [1-" + mcs.getSharedSongsAmount() + "]: ");
+			System.out.print("Please choose a song to add to " + playlist.getName() + " [1-" + mcs.getSharedSongsAmount() + "]: ");
 			int userChoice = sc.nextInt();
 			sc.nextLine();
 

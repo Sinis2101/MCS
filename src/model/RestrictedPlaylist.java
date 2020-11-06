@@ -23,4 +23,9 @@ public class RestrictedPlaylist extends Playlist {
     public String addSong(Song song, Playlist playlist) {
         return null;
     }
+
+    // GETTERS
+    public User[] getUsers() {
+        return users;
+    }
 }

@@ -2,10 +2,13 @@ package model;
 
 public abstract class Playlist {
 
+    public static final int MAX_SONGS = 30;
+
     private String name;
     private String duration;
     private Song[] songs;
     private Genre[] genres;
+    private int songsAmount;
 
     // CONSTRUCTOR
     public Playlist(String name) {
@@ -32,4 +35,13 @@ public abstract class Playlist {
     public Song[] getSongs() {
         return songs;
     }
+    public int getSongsAmount() {
+        return songsAmount;
+    }
+
+    // SETTERS
+    public void increaseSongsAmount(int songsAmount) {
+        this.songsAmount = songsAmount+1;
+    }
+
 }

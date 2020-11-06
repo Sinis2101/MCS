@@ -110,6 +110,26 @@ public class MCS {
 
 	}
 
+	public boolean access(Playlist playlist, User activeUser) {
+
+		if(playlist instanceof PrivatePlaylist) {
+
+			if(activeUser == ((PrivatePlaylist) playlist).getOwner()) return true;
+
+		} else if(playlist instanceof RestrictedPlaylist) {
+
+			for(User accessor : ((RestrictedPlaylist) playlist).getUsers()){
+
+				if(activeUser == accessor) return true;
+
+			}
+
+		}
+
+		return false;
+
+	}
+
 	// GETTERS
 	public int getMaxUsers() {
 		return MAX_USERS;

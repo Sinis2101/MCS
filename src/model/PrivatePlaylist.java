@@ -2,10 +2,7 @@ package model;
 
 public class PrivatePlaylist extends Playlist {
 
-    private static final int MAX_SONGS = 30;
-
     private User owner;
-    private int songsAmount;
 
     public PrivatePlaylist(String name, User owner) {
 
@@ -34,14 +31,19 @@ public class PrivatePlaylist extends Playlist {
             if(getSongs()[i] == null) {
 
                 getSongs()[i] = song;
-                songsAmount ++;
+                increaseSongsAmount(getSongsAmount());
                 added = true;
 
             }
 
         }
 
-        return "Song has been added successfully. Press ENTER to continue.";
+        return "Song has been added successfully to " + getName() + " . Press ENTER to continue.";
 
+    }
+
+    // GETTERS
+    public User getOwner() {
+        return owner;
     }
 }
