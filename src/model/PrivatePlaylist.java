@@ -16,8 +16,9 @@ public class PrivatePlaylist extends Playlist {
 
         return  "Name: " + getName() + "\n" +
                 "Duration: " + getDuration() + "\n" +
-                "Genres: ";
-
+                "Genres: " + "\n" +
+                "Type: Private" + "\n" +
+                "Owner: " + owner.getUsername();
 
     }
 
@@ -38,7 +39,7 @@ public class PrivatePlaylist extends Playlist {
 
         }
 
-        return "Song has been added successfully to " + getName() + " . Press ENTER to continue.";
+        return "Song '" + song.getTitle() + "' has been added successfully to playlist '" + getName() + "' . Press ENTER to continue.";
 
     }
 

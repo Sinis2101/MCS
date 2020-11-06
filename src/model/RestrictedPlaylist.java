@@ -16,12 +16,34 @@ public class RestrictedPlaylist extends Playlist {
 
     @Override
     public String getInfo() {
-        return null;
+
+        return  "Name: " + getName() + "\n" +
+                "Duration: " + getDuration() + "\n" +
+                "Genres: " + "\n" +
+                "Type: Restricted" + "\n" +
+                "Users with access: ";
+
     }
 
     @Override
     public String addSong(Song song, Playlist playlist) {
-        return null;
+
+        boolean added = false;
+
+        for(int i = 0; i < MAX_SONGS && !added; i++) {
+
+            if(getSongs()[i] == null) {
+
+                getSongs()[i] = song;
+                increaseSongsAmount(getSongsAmount());
+                added = true;
+
+            }
+
+        }
+
+        return "Song '" + song.getTitle() + "' has been added successfully to playlist '" + getName() + "' . Press ENTER to continue.";
+
     }
 
     // GETTERS
