@@ -19,7 +19,8 @@ public class Menu {
 
 	Scanner sc = new Scanner(System.in);
 
-	MCS mcs = new MCS();
+	//MCS mcs = new MCS();
+	MCS mcs = new MCS(new User("Sinis", "12345", 19));
 
 	public void start(){
 		
@@ -316,13 +317,12 @@ public class Menu {
 
 					System.out.println("----------- USER " + (i+1) + " -----------");
 					System.out.println(mcs.getUsers()[i].getInfo());
-					System.out.println("------------------------------");
 
 				}
 
 			}
 
-			System.out.print("All users have been shown. Press ENTER to go back.");
+			System.out.print("------------------------------\n" + "All users have been shown. Press ENTER to go back.");
 
 		} else {
 
@@ -341,13 +341,12 @@ public class Menu {
 
 					System.out.println("----------- SONG " + (i+1) + " -----------");
 					System.out.println(mcs.getSongPool()[i].getInfo());
-					System.out.println("------------------------------");
 
 				}
 
 			}
 
-			System.out.print("All songs have been shown. Press ENTER to go back.");
+			System.out.print("------------------------------\n" + "All songs have been shown. Press ENTER to go back.");
 
 		} else {
 
