@@ -24,7 +24,22 @@ public class User {
 
 		return 	"Username: " + username + "\n" +
 				"Age: " + age + "\n" +
-				"Category: " + category.name();
+				"Category: " + category.name() + "\n" +
+				"Shared Songs: " + sharedSongs;
+
+
+	}
+
+	// SETTERS
+	public void incrementSharedSongs(int sharedSongs) {
+		this.sharedSongs = sharedSongs+1;
+	}
+	public void setCategory(int sharedSongs) {
+
+		if(sharedSongs < 3) category = Category.NEWBIE;
+		else if(sharedSongs < 10) category = Category.LITTLE_CONTRIBUITOR;
+		else if(sharedSongs < 30) category = Category.MILD_CONTRIBUITOR;
+		else category = Category.STAR_CONTRIBUITOR;
 
 	}
 
