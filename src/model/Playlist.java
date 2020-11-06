@@ -60,6 +60,9 @@ public abstract class Playlist {
     public int getSongsAmount() {
         return songsAmount;
     }
+    public String[] getGenres() {
+        return genres;
+    }
 
     // SETTERS
     public void increaseSongsAmount(int songsAmount) {
@@ -68,6 +71,11 @@ public abstract class Playlist {
     public void updateDuration(int duration){
 
         this.duration += duration;
+
+    }
+    public void updateGenres(String songGenre){
+
+        genres[0] = songGenre;
 
     }
 

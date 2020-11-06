@@ -8,7 +8,6 @@ public class User {
 	private Category category;
 	private int sharedSongs;
 
-	// CONSTRUCTOR
 	public User(String username, String password, int age) {
 		
 		this.username = username;
@@ -19,7 +18,6 @@ public class User {
 		
 	}
 
-	// METHODS
 	public String getInfo() {
 
 		return 	"Username: " + username + "\n" +
@@ -30,7 +28,6 @@ public class User {
 
 	}
 
-	// SETTERS
 	public void incrementSharedSongs(int sharedSongs) {
 		this.sharedSongs = sharedSongs+1;
 	}
@@ -43,7 +40,6 @@ public class User {
 
 	}
 
-	// GETTERS
 	public String getUsername() {
 		return username;
 	}

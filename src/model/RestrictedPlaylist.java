@@ -22,14 +22,14 @@ public class RestrictedPlaylist extends Playlist {
         return  "Name: " + getName() + "\n" +
                 "Songs: [" + getSongsAmount() + "/" + MAX_SONGS + "]" + "\n" +
                 "Duration: " + durationIntToString(getDuration()) + "\n" +
-                "Genres: " + "\n" +
                 "Type: Restricted" + "\n" +
                 "Users with access:" + "\n" +
                 "- " + getUsersList()[0] + "\n" +
                 "- " + getUsersList()[1] + "\n" +
                 "- " + getUsersList()[2] + "\n" +
                 "- " + getUsersList()[3] + "\n" +
-                "- " + getUsersList()[4];
+                "- " + getUsersList()[4] + "\n" +
+                "Genres: ";
 
     }
 

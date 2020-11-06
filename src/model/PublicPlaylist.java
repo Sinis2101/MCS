@@ -23,9 +23,9 @@ public class PublicPlaylist extends Playlist {
         return  "Name: " + getName() + "\n" +
                 "Songs: [" + getSongsAmount() + "/" + MAX_SONGS + "]" + "\n" +
                 "Duration: " + durationIntToString(getDuration()) + "\n" +
-                "Genres: " + "\n" +
                 "Type: Public" + "\n" +
-                "Rating: " + Math.round((rate/ratersAmount)*10)/10.0;
+                "Rating: " + Math.round((rate/ratersAmount)*10)/10.0 + "\n" +
+                "Genres: ";
 
     }
 

@@ -17,9 +17,9 @@ public class PrivatePlaylist extends Playlist {
         return  "Name: " + getName() + "\n" +
                 "Songs: [" + getSongsAmount() + "/" + MAX_SONGS + "]" + "\n" +
                 "Duration: " + durationIntToString(getDuration()) + "\n" +
-                "Genres: " + "\n" +
                 "Type: Private" + "\n" +
-                "Owner: " + owner.getUsername();
+                "Owner: " + owner.getUsername() + "\n" +
+                "Genres: ";
 
     }
 
@@ -35,6 +35,7 @@ public class PrivatePlaylist extends Playlist {
                 getSongs()[i] = song;
                 increaseSongsAmount(getSongsAmount());
                 updateDuration(song.getDurationInt(song.getDuration()));
+                updateGenres(song.getGenre());
                 added = true;
 
             }
@@ -49,4 +50,5 @@ public class PrivatePlaylist extends Playlist {
     public User getOwner() {
         return owner;
     }
+
 }

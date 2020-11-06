@@ -7,8 +7,7 @@ public class Song {
 	private String releaseDate;
 	private String duration;
 	private String genre;
-	
-	// CONSTRUCTOR
+
 	public Song(String title, String artist, String releaseDate, String duration, int genre) {
 		
 		this.title = title;
@@ -19,7 +18,6 @@ public class Song {
 	
 	}
 
-	// METHODS
 	public String getInfo() {
 
 		return 	"Title: " + title + "\n" +
@@ -43,7 +41,6 @@ public class Song {
 
 	}
 
-	// GETTERS
 	public String getTitle() {
 		return title;
 	}

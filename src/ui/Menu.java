@@ -440,6 +440,12 @@ public class Menu {
 
 					System.out.println("--------- PLAYLIST " + (i+1) + " ---------");
 					System.out.println(accessiblePlaylists[i].getInfo());
+					String[] genres = accessiblePlaylists[i].getGenres();
+					for(String genre : genres) {
+
+						if(genre != null) System.out.println("- " + genre);
+
+					}
 
 				}
 
