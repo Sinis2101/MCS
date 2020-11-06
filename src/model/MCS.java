@@ -124,6 +124,10 @@ public class MCS {
 
 			}
 
+		} else if(playlist instanceof PublicPlaylist) {
+
+			return true;
+
 		}
 
 		return false;
