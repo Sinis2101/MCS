@@ -15,6 +15,7 @@ public class PrivatePlaylist extends Playlist {
     public String getInfo() {
 
         return  "Name: " + getName() + "\n" +
+                "Songs: [" + getSongsAmount() + "/" + MAX_SONGS + "]" + "\n" +
                 "Duration: " + getDuration() + "\n" +
                 "Genres: " + "\n" +
                 "Type: Private" + "\n" +
