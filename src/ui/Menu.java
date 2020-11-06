@@ -221,7 +221,7 @@ public class Menu {
 
 			case(SHOW_PLAYLISTS):
 
-
+				showPlaylists();
 
 				break;
 
@@ -376,6 +376,46 @@ public class Menu {
 		} else {
 
 			System.out.print("------------------------------\n" + "There are no songs to show. Press ENTER to go back.");
+
+		}
+
+	}
+	public void showPlaylists() {
+
+		Playlist[] accessiblePlaylists = new Playlist[20];
+		int accessiblePlaylistsAmount = 0;
+		int index = 0;
+
+		for(int i = 0; i < mcs.getPlaylistAmount(); i++){
+
+			if(mcs.access(mcs.getPlaylists()[i], mcs.getActiveUser())){
+
+				accessiblePlaylists[index] = mcs.getPlaylists()[i];
+				index ++;
+				accessiblePlaylistsAmount ++;
+
+			}
+
+		}
+
+		if(accessiblePlaylists[0] != null){
+
+			for(int i = 0; i < accessiblePlaylistsAmount; i++) {
+
+				if (accessiblePlaylists[i] != null) {
+
+					System.out.println("----------- PLAYLIST " + (i+1) + " -----------");
+					System.out.println(accessiblePlaylists[i].getInfo());
+
+				}
+
+			}
+
+			System.out.print("------------------------------\n" + "All playlists have been shown. Press ENTER to go back.");
+
+		} else {
+
+			System.out.print("------------------------------\n" + "There are no playlists to show. Press ENTER to go back.");
 
 		}
 
