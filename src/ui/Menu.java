@@ -208,17 +208,66 @@ public class Menu {
 
 			case(MANAGE_ACCESS):
 
-				if(mcs.getPlaylists()[0] != null) {
+				if(mcs.getPlaylists()[0] != null && mcs.getUsers()[0] != null) {
 
-					Playlist playlist = chooseRestrictedPlaylist();
+					RestrictedPlaylist playlist = (RestrictedPlaylist) chooseRestrictedPlaylist();
 
-				} else System.out.print("------------------------------\n" + "There are no playlists to manage. Press ENTER to go back.");
+					if(playlist != null) {
+
+						User choosenUser = chooseUser();
+
+						if(mcs.checkSpace(playlist.getUserAmount(), RestrictedPlaylist.MAX_USERS)){
+
+							System.out.println("------------------------------");
+							System.out.println(playlist.grantAccess(choosenUser, playlist));
+							System.out.print("Playlist Users: [" + playlist.getUserAmount() + "/" + RestrictedPlaylist.MAX_USERS + "]");
+
+						} else {
+
+							System.out.print("------------------------------\n" + "No more users can be added to this playlist. The limit has been reached. Press ENTER to go back.");
+
+						}
+
+					}
+
+				} else if(mcs.getPlaylists()[0] == null && mcs.getUsers()[0] != null ) {
+
+					System.out.print("------------------------------\n" + "There are no playlists to add users to. Press ENTER to go back.");
+
+				} else if(mcs.getPlaylists()[0] != null && mcs.getUsers()[0] == null ) {
+
+					System.out.print("------------------------------\n" + "There are no users to add. Press ENTER to go back.");
+
+				} else System.out.print("------------------------------\n" + "No users or playlists found. Press ENTER to go back.");
 
 				break;
 
 			case(RATE_PLAYLIST):
 
+				if(mcs.getPlaylists()[0] != null) {
 
+					PublicPlaylist playlist = (PublicPlaylist) choosePublicPlaylist();
+
+					if(playlist != null) {
+
+						if(playlist.canRate(mcs.getActiveUser())) {
+
+							System.out.println("----------------------------------");
+							System.out.print("Please add a rate [1-5]: ");
+							double rate = sc.nextInt();
+							sc.nextLine();
+
+							playlist.setRate(mcs.getActiveUser(), rate);
+
+						} else {
+
+							System.out.print("------------------------------\n" + "User '" + mcs.getActiveUser().getUsername() + "' has already rated playlist '" + playlist.getName() + "' . Press ENTER to go back.");
+
+						}
+
+					}
+
+				} else System.out.print("------------------------------\n" + "No playlists found. Press ENTER to go back.");
 
 				break;
 
@@ -389,7 +438,7 @@ public class Menu {
 
 				if (accessiblePlaylists[i] != null) {
 
-					System.out.println("----------- PLAYLIST " + (i+1) + " -----------");
+					System.out.println("--------- PLAYLIST " + (i+1) + " ---------");
 					System.out.println(accessiblePlaylists[i].getInfo());
 
 				}
@@ -502,6 +551,57 @@ public class Menu {
 		} else {
 
 			System.out.print("------------------------------\n" + "There are no restricted playlists to manage. Press ENTER to go back.");
+			return null;
+
+		}
+
+		return null;
+
+	}
+	public Playlist choosePublicPlaylist() {
+
+		Playlist[] publicPlaylists = new Playlist[20];
+		int publicPlaylistsAmount = 0;
+		int index = 0;
+
+		for(int i = 0; i < mcs.getPlaylistAmount(); i++){
+
+			if(mcs.getPlaylists()[i] instanceof PublicPlaylist){
+
+				publicPlaylists[index] = mcs.getPlaylists()[i];
+				index ++;
+				publicPlaylistsAmount ++;
+
+			}
+
+		}
+
+		if(publicPlaylistsAmount != 0){
+
+			for(Playlist playlist : publicPlaylists) {
+
+				if(playlist != null){
+
+					System.out.println("------ CHOOSE PLAYLIST -------");
+					for (int i = 0; i < publicPlaylistsAmount; i++) {
+
+						System.out.println("[" + (i+1) + "] " + publicPlaylists[i].getName());
+
+					}
+					System.out.println("------------------------------");
+					System.out.print("Please choose a playlist [1-" + publicPlaylistsAmount + "]: ");
+					int userChoice = sc.nextInt();
+					sc.nextLine();
+
+					return publicPlaylists[userChoice-1];
+
+				}
+
+			}
+
+		} else {
+
+			System.out.print("------------------------------\n" + "There are no public playlists to rate. Press ENTER to go back.");
 			return null;
 
 		}
