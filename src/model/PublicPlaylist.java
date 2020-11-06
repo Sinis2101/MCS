@@ -25,7 +25,7 @@ public class PublicPlaylist extends Playlist {
                 "Duration: " + getDuration() + "\n" +
                 "Genres: " + "\n" +
                 "Type: Public" + "\n" +
-                "Rating: " + rate;
+                "Rating: " + Math.round((rate/ratersAmount)*10)/10.0;
 
     }
 
@@ -50,4 +50,35 @@ public class PublicPlaylist extends Playlist {
 
     }
 
+    public void setRate(User rater, double rate) {
+
+        boolean added = false;
+
+        for(int i = 0; i < MAX_RATINGS && !added; i++) {
+
+            if(raters[i] == null) {
+
+                raters[i] = rater;
+                ratersAmount ++;
+                added = true;
+
+            }
+
+        }
+
+        this.rate += rate;
+
+    }
+
+    public boolean canRate(User activeUser){
+
+        for(User rater : raters) {
+
+            if(rater == activeUser) return false;
+
+        }
+
+        return true;
+
+    }
 }
