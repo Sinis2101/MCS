@@ -27,6 +27,19 @@ public class MCS {
 		this.activeUser = null;
 
 	}
+	public MCS(User activeUser){
+
+		users = new User[MAX_USERS];
+		users[0] = activeUser;
+		songPool = new Song[MAX_SHARED_SONGS];
+		playlists = new Playlist[MAX_PLAYLISTS];
+
+		userAmount = 1;
+		sharedSongsAmount = 0;
+		playlistAmount = 0;
+		this.activeUser = activeUser;
+
+	} // For testing purposes (Starts program with an active user).
 
 	public boolean checkSpace(int currentAmount, int maxAmount){
 
@@ -58,13 +71,15 @@ public class MCS {
 
 		String message = "Song has been added successfully. Press ENTER to continue.";
 		boolean added = false;
-		sharedSongsAmount ++;
 
 		for(int i = 0; i < MAX_SHARED_SONGS && !added; i++) {
 
 			if(songPool[i] == null) {
 
 				songPool[i] = song;
+				sharedSongsAmount ++;
+				activeUser.incrementSharedSongs(activeUser.getSharedSongs());
+				activeUser.setCategory(activeUser.getSharedSongs());
 				added = true;
 
 			}
