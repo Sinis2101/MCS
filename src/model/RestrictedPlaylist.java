@@ -21,7 +21,7 @@ public class RestrictedPlaylist extends Playlist {
 
         return  "Name: " + getName() + "\n" +
                 "Songs: [" + getSongsAmount() + "/" + MAX_SONGS + "]" + "\n" +
-                "Duration: " + getDuration() + "\n" +
+                "Duration: " + durationIntToString(getDuration()) + "\n" +
                 "Genres: " + "\n" +
                 "Type: Restricted" + "\n" +
                 "Users with access:" + "\n" +
@@ -44,6 +44,7 @@ public class RestrictedPlaylist extends Playlist {
 
                 getSongs()[i] = song;
                 increaseSongsAmount(getSongsAmount());
+                updateDuration(song.getDurationInt(song.getDuration()));
                 added = true;
 
             }

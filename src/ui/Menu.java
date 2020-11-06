@@ -311,10 +311,10 @@ public class Menu {
 		System.out.print("Artist: ");
 		String artist = sc.nextLine();
 
-		System.out.print("Release Date: ");
+		System.out.print("Release Date (dd/mm/yy): ");
 		String releaseDate = sc.nextLine();
 
-		System.out.print("Duration: ");
+		System.out.print("Duration (mm:ss): ");
 		String duration = sc.nextLine();
 
 		System.out.println("---------- CHOOSE GENRE ----------");

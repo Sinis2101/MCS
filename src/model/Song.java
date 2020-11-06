@@ -29,7 +29,7 @@ public class Song {
 
 	}
 
-	public int durationToSeconds(String duration){
+	public int getDurationInt(String duration){
 
 		String[] stringUnits = duration.split(":");
 		int[] intUnits = new int[2];

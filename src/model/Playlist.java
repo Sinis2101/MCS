@@ -5,31 +5,53 @@ public abstract class Playlist {
     public static final int MAX_SONGS = 30;
 
     private String name;
-    private String duration;
+    private int duration;
     private Song[] songs;
-    private Genre[] genres;
+    private String[] genres;
     private int songsAmount;
 
-    // CONSTRUCTOR
     public Playlist(String name) {
 
         this.name = name;
-        duration = "0:00";
+        duration = 0;
         songs = new Song[30];
-        genres = new Genre[6];
-        genres[0] = Genre.Unknown;
+        genres = new String[6];
+        genres[0] = Genre.Unknown.name();
 
     }
 
-    // METHODS
+    /**
+     * Gets basic information from playlist.
+     * @return Returns a string with all the basic information from the playlist.
+     */
     public abstract String getInfo();
+
+    /**
+     * Adds a song to the playlist.
+     * @param song A Song Object that will be added to the playlist. song != null.
+     * @param playlist A Playlist Object that will receive the added song. playlist != null.
+     * @return Returns a string with the result of the operation.
+     */
     public abstract String addSong(Song song, Playlist playlist);
+
+    public String durationIntToString(int duration){
+
+        int minutes = duration/60;
+        int seconds = duration%60;
+
+        if(seconds<10){
+
+            return minutes + ":0" + seconds;
+
+        } else return minutes + ":" + seconds;
+
+    }
 
     // GETTERS
     public String getName() {
         return name;
     }
-    public String getDuration() {
+    public int getDuration() {
         return duration;
     }
     public Song[] getSongs() {
@@ -42,6 +64,11 @@ public abstract class Playlist {
     // SETTERS
     public void increaseSongsAmount(int songsAmount) {
         this.songsAmount = songsAmount+1;
+    }
+    public void updateDuration(int duration){
+
+        this.duration += duration;
+
     }
 
 }

@@ -22,7 +22,7 @@ public class PublicPlaylist extends Playlist {
 
         return  "Name: " + getName() + "\n" +
                 "Songs: [" + getSongsAmount() + "/" + MAX_SONGS + "]" + "\n" +
-                "Duration: " + getDuration() + "\n" +
+                "Duration: " + durationIntToString(getDuration()) + "\n" +
                 "Genres: " + "\n" +
                 "Type: Public" + "\n" +
                 "Rating: " + Math.round((rate/ratersAmount)*10)/10.0;
@@ -40,6 +40,7 @@ public class PublicPlaylist extends Playlist {
 
                 getSongs()[i] = song;
                 increaseSongsAmount(getSongsAmount());
+                updateDuration(song.getDurationInt(song.getDuration()));
                 added = true;
 
             }
