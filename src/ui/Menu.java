@@ -190,20 +190,32 @@ public class Menu {
 
 			case(ADD_SONG_TO_PLAYLIST):
 
-				Playlist playlist = choosePlaylist();
-				Song song = chooseSong(playlist);
+				if(mcs.getPlaylists()[0] != null && mcs.getSongPool()[0] != null) {
 
-				if(mcs.checkSpace(playlist.getSongsAmount(), Playlist.MAX_SONGS)){
+					Playlist playlist = choosePlaylist();
+					Song song = chooseSong(playlist);
 
-					System.out.println("------------------------------");
-					System.out.println(playlist.addSong(song, playlist));
-					System.out.print("Playlist Songs: [" + playlist.getSongsAmount() + "/" + Playlist.MAX_SONGS + "]");
+					if(mcs.checkSpace(playlist.getSongsAmount(), Playlist.MAX_SONGS)){
 
-				} else {
+						System.out.println("------------------------------");
+						System.out.println(playlist.addSong(song, playlist));
+						System.out.print("Playlist Songs: [" + playlist.getSongsAmount() + "/" + Playlist.MAX_SONGS + "]");
 
-					System.out.print("------------------------------\n" + "No more songs can be added to this playlist. The limit has been reached. Press ENTER to go back.");
+					} else {
 
-				}
+						System.out.print("------------------------------\n" + "No more songs can be added to this playlist. The limit has been reached. Press ENTER to go back.");
+
+					}
+
+				} else if(mcs.getPlaylists()[0] == null && mcs.getSongPool()[0] != null ) {
+
+					System.out.print("------------------------------\n" + "There are no playlists to add songs to. Press ENTER to go back.");
+
+				} else if(mcs.getPlaylists()[0] != null && mcs.getSongPool()[0] == null ) {
+
+					System.out.print("------------------------------\n" + "There are no songs to add. Press ENTER to go back.");
+
+				} else System.out.print("------------------------------\n" + "No songs or playlists found. Press ENTER to go back.");
 
 				break;
 
