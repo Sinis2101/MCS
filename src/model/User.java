@@ -8,6 +8,12 @@ public class User {
 	private Category category;
 	private int sharedSongs;
 
+	/**
+	 * Constructor of a user.
+	 * @param username A String containing the username of the user. username != "" && username != null.
+	 * @param password A String containing the password of the user. password != "" && password != null.
+	 * @param age An integer containing the age of the user.
+	 */
 	public User(String username, String password, int age) {
 		
 		this.username = username;
@@ -18,6 +24,10 @@ public class User {
 		
 	}
 
+	/**
+	 * Gets basic information from the user.
+	 * @return Returns a string with all the basic information from the user.
+	 */
 	public String getInfo() {
 
 		return 	"Username: " + username + "\n" +
@@ -28,9 +38,18 @@ public class User {
 
 	}
 
+	/**
+	 * Increase the amount of songs in the user has shared.
+	 * @param sharedSongs An integer representing the current shared songs amount.
+	 */
 	public void incrementSharedSongs(int sharedSongs) {
 		this.sharedSongs = sharedSongs+1;
 	}
+
+	/**
+	 * Sets user category based on the amount of songs shared.
+	 * @param sharedSongs An integer representing the user's amount of shared songs.
+	 */
 	public void setCategory(int sharedSongs) {
 
 		if(sharedSongs < 3) category = Category.NEWBIE;

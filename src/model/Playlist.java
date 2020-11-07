@@ -34,6 +34,11 @@ public abstract class Playlist {
      */
     public abstract String addSong(Song song, Playlist playlist);
 
+    /**
+     * Gets duration in seconds and converts it to String format (mm:ss)
+     * @param duration An integer representing duration in seconds.
+     * @return Returns String with duration in format (mm:ss).
+     */
     public String durationIntToString(int duration){
 
         int minutes = duration/60;
@@ -47,7 +52,6 @@ public abstract class Playlist {
 
     }
 
-    // GETTERS
     public String getName() {
         return name;
     }
@@ -64,15 +68,28 @@ public abstract class Playlist {
         return genres;
     }
 
-    // SETTERS
+    /**
+     * Increase the amount of songs in the playlist.
+     * @param songsAmount An integer representing the current song amount.
+     */
     public void increaseSongsAmount(int songsAmount) {
         this.songsAmount = songsAmount+1;
     }
+
+    /**
+     * Updates duration of the playlist based on the sum of the duration of all the playlist songs.
+     * @param duration An integer representing the duration of the recent added song.
+     */
     public void updateDuration(int duration){
 
         this.duration += duration;
 
     }
+
+    /**
+     * Updates genres of the playlist based on the genres of all the playlist songs.
+     * @param songGenre A String representing the genre of the recent added song.
+     */
     public void updateGenres(String songGenre){
 
         genres[0] = songGenre;

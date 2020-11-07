@@ -15,6 +15,9 @@ public class MCS {
 	private int playlistAmount;
 	private User activeUser;
 
+	/**
+	 * MCS Constructor.
+	 */
 	public MCS(){
 
 		users = new User[MAX_USERS];
@@ -27,6 +30,11 @@ public class MCS {
 		this.activeUser = null;
 
 	}
+
+	/**
+	 * MCS Constructor for testing purposes (Starts program with an active user).
+	 * @param activeUser Active user. activeUser != null.
+	 */
 	public MCS(User activeUser){
 
 		users = new User[MAX_USERS];
@@ -39,14 +47,25 @@ public class MCS {
 		playlistAmount = 0;
 		this.activeUser = activeUser;
 
-	} // For testing purposes (Starts program with an active user).
+	}
 
+	/**
+	 * Check if a current amount is less than the max amount.
+	 * @param currentAmount An integer representing current amount of something.
+	 * @param maxAmount An integer representing max amount of something.
+	 * @return Returns true if current amount is less than the max amount or false if current amount is more than the max amount.
+	 */
 	public boolean checkSpace(int currentAmount, int maxAmount){
 
 		return currentAmount < maxAmount;
 
 	}
 
+	/**
+	 * Adds a user to the users list.
+	 * @param user A User Object to be added to the user list. user != null.
+	 * @return Returns message with the result of the operation.
+	 */
 	public String add(User user) {
 
 		String message = "User has been added successfully. Press ENTER to continue.";
@@ -67,6 +86,12 @@ public class MCS {
 		return message;
 
 	}
+
+	/**
+	 * Adds a song to the songs list.
+	 * @param song A Song Object to be added to the song list. song != null.
+	 * @return Returns message with the result of the operation.
+	 */
 	public String add(Song song) {
 
 		String message = "Song has been added successfully. Press ENTER to continue.";
@@ -89,6 +114,12 @@ public class MCS {
 		return message;
 
 	}
+
+	/**
+	 * Adds a playlist to the playlists list.
+	 * @param playlist A Playlist Object to be added to the playlist list. playlist != null.
+	 * @return Returns message with the result of the operation.
+	 */
 	public String add(Playlist playlist) {
 
 		String message = "Playlist has been added successfully. Press ENTER to continue.";
@@ -110,6 +141,12 @@ public class MCS {
 
 	}
 
+	/**
+	 * Checks if a user has access to a playlist.
+	 * @param playlist The playlist object the user wants to have access to. playlist != null.
+	 * @param activeUser The user that is asking for access. activeUser != null.
+	 * @return Returns true if user exists in the users that can access the playlist or false if not.
+	 */
 	public boolean access(Playlist playlist, User activeUser) {
 
 		if(playlist instanceof PrivatePlaylist) {
@@ -134,7 +171,6 @@ public class MCS {
 
 	}
 
-	// GETTERS
 	public int getMaxUsers() {
 		return MAX_USERS;
 	}
@@ -166,7 +202,11 @@ public class MCS {
 		return activeUser;
 	}
 
-	// SETTERS
+	/**
+	 * Sets a user as the active user.
+	 * @param activeUser The user to be set as the active user. activeUser != null.
+	 * @return Returns message with the result of the operation.
+	 */
 	public String setActiveUser(User activeUser) {
 
 		this.activeUser = activeUser;

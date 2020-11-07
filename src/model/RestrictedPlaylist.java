@@ -7,6 +7,11 @@ public class RestrictedPlaylist extends Playlist {
     private User[] users;
     private int userAmount;
 
+    /**
+     * Restricted playlist constructor.
+     * @param name A string containing the name of the playlist. name != "" && name != null.
+     * @param user A user object containing the active user.
+     */
     public RestrictedPlaylist(String name, User user) {
 
         super(name);
@@ -16,6 +21,10 @@ public class RestrictedPlaylist extends Playlist {
 
     }
 
+    /**
+     * Gets basic information from the playlist.
+     * @return Returns a string with all the basic information from the playlist.
+     */
     @Override
     public String getInfo() {
 
@@ -33,6 +42,12 @@ public class RestrictedPlaylist extends Playlist {
 
     }
 
+    /**
+     * Adds a song to the playlist.
+     * @param song A Song Object that will be added to the playlist. song != null.
+     * @param playlist A Playlist Object that will receive the added song. playlist != null.
+     * @return Returns a message with the result of the operation.
+     */
     @Override
     public String addSong(Song song, Playlist playlist) {
 
@@ -55,6 +70,12 @@ public class RestrictedPlaylist extends Playlist {
 
     }
 
+    /**
+     * Grants access to a user to access a playlist.
+     * @param user User asking for playlist access. user != null.
+     * @param playlist Playlist the user wants to access. playlist != null.
+     * @return Returns a message with the result of the operation.
+     */
     public String grantAccess(User user, Playlist playlist) {
 
         boolean isAccessor = false;
@@ -88,13 +109,17 @@ public class RestrictedPlaylist extends Playlist {
 
     }
 
-    // GETTERS
     public User[] getUsers() {
         return users;
     }
     public int getUserAmount() {
         return userAmount;
     }
+
+    /**
+     * Gets the username of each user in the playlist.
+     * @return A String array containing all playlist user's username.
+     */
     public String[] getUsersList() {
 
         String[] userList = new String[MAX_USERS];

@@ -8,6 +8,10 @@ public class PublicPlaylist extends Playlist {
     private double rate;
     private int ratersAmount;
 
+    /**
+     * Public playlist constructor.
+     * @param name A string containing the name of the playlist. name != "" && name != null.
+     */
     public PublicPlaylist(String name) {
 
         super(name);
@@ -17,6 +21,10 @@ public class PublicPlaylist extends Playlist {
 
     }
 
+    /**
+     * Gets basic information from the playlist.
+     * @return Returns a string with all the basic information from the playlist.
+     */
     @Override
     public String getInfo() {
 
@@ -29,6 +37,12 @@ public class PublicPlaylist extends Playlist {
 
     }
 
+    /**
+     * Adds a song to the playlist.
+     * @param song A Song Object that will be added to the playlist. song != null.
+     * @param playlist A Playlist Object that will receive the added song. playlist != null.
+     * @return Returns a string with the result of the operation.
+     */
     @Override
     public String addSong(Song song, Playlist playlist) {
 
@@ -51,6 +65,11 @@ public class PublicPlaylist extends Playlist {
 
     }
 
+    /**
+     * Sums entered rate to current rate and adds the rater to the playlist raters list.
+     * @param rater A user object representing the user that entered the rating.
+     * @param rate A double representing the user's rate.
+     */
     public void setRate(User rater, double rate) {
 
         boolean added = false;
@@ -71,6 +90,11 @@ public class PublicPlaylist extends Playlist {
 
     }
 
+    /**
+     * Checks if a user has already rated the list.
+     * @param activeUser The user trying to rate the list.
+     * @return Returns true if the user has not rate the list or false if the user has already rated the list.
+     */
     public boolean canRate(User activeUser){
 
         for(User rater : raters) {

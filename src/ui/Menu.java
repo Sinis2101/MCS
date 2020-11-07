@@ -19,9 +19,13 @@ public class Menu {
 
 	Scanner sc = new Scanner(System.in);
 
-	//MCS mcs = new MCS();
-	MCS mcs = new MCS(new User("Sinis", "12345", 19));
+	MCS mcs = new MCS();
 
+	//MCS mcs = new MCS(new User("Sinis", "12345", 19)); // For testing purposes (Starts program with an active user).
+
+	/**
+	 * Starts the program.
+	 */
 	public void start(){
 		
 		int choice;
@@ -46,7 +50,10 @@ public class Menu {
 		} while (choice != 11);
 
 	}
-	
+
+	/**
+	 * Show the menu.
+	 */
 	public void showMenu(){
 
 		System.out.println("------------ MENU ------------");
@@ -80,6 +87,10 @@ public class Menu {
 		
 	}
 
+	/**
+	 * Asks the user for a choice
+	 * @return Returns an integer representing the user's choice.
+	 */
 	public int getChoice(){
 		
 		int choice;
@@ -89,8 +100,12 @@ public class Menu {
 
 		return choice;
 		
-	}	
+	}
 
+	/**
+	 * Performs the user choice.
+	 * @param choice An integer representing the user's choice.
+	 */
 	public void doChoice(int choice){
 
 		switch(choice){
@@ -283,7 +298,10 @@ public class Menu {
 
 	}
 
-	// CREATE
+	/**
+	 * Asks the user for the new user data.
+	 * @return Returns a User Object ready to be added.
+	 */
 	public User createUser(){
 
 		System.out.println("---------- NEW USER ----------");
@@ -301,6 +319,11 @@ public class Menu {
 		return new User(name, password, age);
 
 	}
+
+	/**
+	 * Asks the user for the new song data.
+	 * @return Returns a Song Object ready to be added.
+	 */
 	public Song createSong(){
 
 		System.out.println("---------- NEW SONG ----------");
@@ -331,6 +354,11 @@ public class Menu {
 		return new Song(title, artist, releaseDate, duration, genre);
 
 	}
+
+	/**
+	 * Asks the user for the new playlist data.
+	 * @return Returns a Playlist Object ready to be added.
+	 */
 	public Playlist createPlaylist(){
 
 		System.out.println("-------- NEW PLAYLIST --------");
@@ -365,7 +393,9 @@ public class Menu {
 
 	}
 
-	// SHOW
+	/**
+	 * Shows all users.
+	 */
 	public void showUsers() {
 
 		if(mcs.getUsers()[0] != null){
@@ -390,6 +420,10 @@ public class Menu {
 		}
 
 	}
+
+	/**
+	 * Shows all shared songs.
+	 */
 	public void showSharedSongs() {
 
 		if(mcs.getSongPool()[0] != null){
@@ -414,6 +448,10 @@ public class Menu {
 		}
 
 	}
+
+	/**
+	 * Shows all the playlists the active user has access to.
+	 */
 	public void showPlaylists() {
 
 		Playlist[] accessiblePlaylists = new Playlist[20];
@@ -461,7 +499,10 @@ public class Menu {
 
 	}
 
-	// CHOOSE
+	/**
+	 * Allow the user to see and choose from all the playlists he has access to.
+	 * @return Returns the playlist the user chose.
+	 */
 	public Playlist choosePlaylist() {
 
 		Playlist[] accessiblePlaylists = new Playlist[20];
@@ -513,6 +554,11 @@ public class Menu {
 		return null;
 
 	}
+
+	/**
+	 * Allow the user to see and choose from all the restricted playlists he has access to.
+	 * @return Returns the restricted playlist the user chose.
+	 */
 	public Playlist chooseRestrictedPlaylist() {
 
 		Playlist[] accessiblePlaylists = new Playlist[20];
@@ -564,6 +610,11 @@ public class Menu {
 		return null;
 
 	}
+
+	/**
+	 * Allow the user to see and choose from all the public playlists he has access to.
+	 * @return Returns the public playlist the user chose.
+	 */
 	public Playlist choosePublicPlaylist() {
 
 		Playlist[] publicPlaylists = new Playlist[20];
@@ -615,6 +666,11 @@ public class Menu {
 		return null;
 
 	}
+
+	/**
+	 * Allow the user to see and choose from all the shared songs.
+	 * @return Returns the song the user chose.
+	 */
 	public Song chooseSong(Playlist playlist) {
 
 		if(mcs.getSongPool()[0] != null){
@@ -640,6 +696,11 @@ public class Menu {
 		}
 
 	}
+
+	/**
+	 * Allow the user to see and choose from all the users.
+	 * @return Returns the user the user chose.
+	 */
 	public User chooseUser() {
 
 		if(mcs.getUsers()[0] != null){

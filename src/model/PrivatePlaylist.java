@@ -4,6 +4,11 @@ public class PrivatePlaylist extends Playlist {
 
     private User owner;
 
+    /**
+     * Private Playlist constructor.
+     * @param name A string containing the name of the playlist. name != "" && name != null.
+     * @param owner A user object containing the active user.
+     */
     public PrivatePlaylist(String name, User owner) {
 
         super(name);
@@ -11,6 +16,10 @@ public class PrivatePlaylist extends Playlist {
 
     }
 
+    /**
+     * Gets basic information from the playlist.
+     * @return Returns a string with all the basic information from the playlist.
+     */
     @Override
     public String getInfo() {
 
@@ -23,6 +32,12 @@ public class PrivatePlaylist extends Playlist {
 
     }
 
+    /**
+     * Adds a song to the playlist.
+     * @param song A Song Object that will be added to the playlist. song != null.
+     * @param playlist A Playlist Object that will receive the added song. playlist != null.
+     * @return Returns a string with the result of the operation.
+     */
     @Override
     public String addSong(Song song, Playlist playlist) {
 
@@ -46,7 +61,6 @@ public class PrivatePlaylist extends Playlist {
 
     }
 
-    // GETTERS
     public User getOwner() {
         return owner;
     }
